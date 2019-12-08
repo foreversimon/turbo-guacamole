@@ -40,6 +40,29 @@ function noSpace(board){
     return true;
 }
 
+function canMoveUp(board){
+    for(var i=1;i<4;i++){
+        for(var j=0;j<4;j++){
+            if(board[i][j]!=0)
+                if(board[i-1][j]==0||board[i-1][j]==board[i][j])
+                    return true;
+        }
+    }
+    return false;
+}
+
+function canMoveDown(board){
+    for(var i=2;i>=0;i--){
+        for(var j=0;j<4;j++){
+            if(board[i][j]!=0){
+                if(board[i+1][j]==0||board[i+1][j]==board[i][j]){
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+}
 function canMoveLeft(board){
     for(var i=0;i<4;i++){
         for(var j=1;j<4;j++){
@@ -51,11 +74,45 @@ function canMoveLeft(board){
     return false;
 }
 
-function noBlockHorizontal(i,k,j,board){
-    for(var a=k+1;a<j;a++){
-        if(board[i][a]!=0){
+function canMoveRight(board){
+    for(var i=0;i<4;i++){
+        for(var j=2;j>=0;j--){
+            if(board[i][j]!=0){
+                if(board[i][j+1]==0||board[i][j+1]==board[i][j]){
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+}
+
+function noBlockHorizontal(row,col1,col2,board){
+    for(var i=col1+1;i<col2;i++){
+        if(board[row][i]!=0){
             return false;
         }
     }
     return true;
+}
+
+function noBlockVertical(row,col1,col2,board){
+    for(var i=col1+1;i<col2;i++){
+        if(board[i][row]!=0){
+            return false;
+        }
+    }
+    return true;
+}
+
+function noMove(board){
+    if(
+        canMoveUp(board)||
+        canMoveDown(board)||
+        canMoveLeft(board)||
+        canMoveRight(board)
+    )
+        return false;
+    else
+        return true;
 }
