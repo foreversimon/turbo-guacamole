@@ -39,3 +39,23 @@ function noSpace(board){
     }
     return true;
 }
+
+function canMoveLeft(board){
+    for(var i=0;i<4;i++){
+        for(var j=1;j<4;j++){
+            if(board[i][j]!=0)
+                if(board[i][j-1]==0||board[i][j-1]==board[i][j])
+                    return true;
+        }
+    }
+    return false;
+}
+
+function noBlockHorizontal(i,k,j,board){
+    for(var a=k+1;a<j;a++){
+        if(board[i][a]!=0){
+            return false;
+        }
+    }
+    return true;
+}
