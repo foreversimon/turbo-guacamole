@@ -6,6 +6,8 @@ $(document).ready(function(){
 })
 
 function newgame(){
+    score=0;
+    updateScore();
     init();
     generateOneNumber();
     generateOneNumber();
@@ -25,6 +27,7 @@ function init(){
             board[i][j]=0;
     }
     updateBoardView();
+    
 }
 
 function updateBoardView(){
@@ -50,6 +53,10 @@ function updateBoardView(){
             }
         }
     }
+}
+
+function updateScore(){
+    document.getElementById("score").innerHTML=score;
 }
 
 function generateOneNumber(){
@@ -131,12 +138,14 @@ function moveUp(){
                         showMoveAnimation(i,j,k,j);
                         board[k][j] += board[i][j];
                         board[i][j] = 0;
+                        score+=board[k][j];
                         continue;
                     }
                 }
             }
         }
     }
+    updateScore();
     setTimeout("updateBoardView()",200);
     return true;
 }
@@ -159,12 +168,14 @@ function moveDown(){
                         showMoveAnimation(i,j,k,j);
                         board[k][j] += board[i][j];
                         board[i][j] = 0;
+                        score+=board[k][j];
                         continue;
                     }
                 }
             }
         }
     }
+    updateScore();
     setTimeout("updateBoardView()",200);
     return true;
 }
@@ -187,11 +198,13 @@ function moveLeft(){
                         showMoveAnimation(i,j,i,k);
                         board[i][k] += board[i][j];
                         board[i][j] = 0;
+                        score+=board[i][k];
                         continue;
                     }
                 }
             }
         }
+    updateScore();
     setTimeout("updateBoardView()",200);
     return true;
 }
@@ -214,12 +227,14 @@ function moveRight(){
                         showMoveAnimation(i,j,i,k);
                         board[i][k] += board[i][j];
                         board[i][j] = 0;
+                        score+=board[i][k];
                         continue;
                     }
                 }
             }
         }
     }
+    updateScore();
     setTimeout("updateBoardView()",200);
     return true;
 }
